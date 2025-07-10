@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api';
+const isDev = import.meta.env.DEV;
+
+const API_BASE_URL = isDev
+  ? '/api' 
+  : 'https://assement-vzu3.onrender.com'; 
 
 // Get all boards
 export async function getBoards() {
@@ -12,6 +16,7 @@ export async function getBoards() {
     throw error;
   }
 }
+
 
 // Create a new board
 export async function createBoard(data) {
