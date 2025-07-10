@@ -1,5 +1,6 @@
 "use client"
 import { deleteTask } from "../services/api.js"
+import { FiEdit, FiTrash2, FiUser, FiCalendar } from "react-icons/fi"
 
 const priorityColors = {
   Low: "#28a745",
@@ -26,11 +27,11 @@ function TaskCard({ task, onEdit, onDelete }) {
       <div className="task-header">
         <h4>{task.title}</h4>
         <div className="task-actions">
-          <button onClick={onEdit} className="btn-icon">
-            ✏️
+          <button onClick={onEdit} className="btn-icon" title="Edit">
+            <FiEdit />
           </button>
-          <button onClick={handleDelete} className="btn-icon">
-            🗑️
+          <button onClick={handleDelete} className="btn-icon" title="Delete">
+            <FiTrash2 />
           </button>
         </div>
       </div>
@@ -42,10 +43,16 @@ function TaskCard({ task, onEdit, onDelete }) {
           {task.priority}
         </span>
 
-        {task.assignedTo && <div className="assigned-to">👤 {task.assignedTo}</div>}
+        {task.assignedTo && (
+          <div className="assigned-to">
+            <FiUser style={{ marginRight: "4px" }} />
+            {task.assignedTo}
+          </div>
+        )}
 
         <div className={`due-date ${isOverdue ? "overdue" : ""}`}>
-          📅 {new Date(task.dueDate).toLocaleDateString()}
+          <FiCalendar style={{ marginRight: "4px" }} />
+          {new Date(task.dueDate).toLocaleDateString()}
           {isOverdue && " (Overdue)"}
         </div>
       </div>
